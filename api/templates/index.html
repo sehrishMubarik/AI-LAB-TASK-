@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Random Recipe</h1>
+        {% if apod %}
+            <h2>{{ apod["recipes"][0]["title"] }}</h2>
+            <img src="{{ apod['recipes'][0]['image'] }}" alt="Recipe Image">
+            <h3>Ingredients:</h3>
+            <ul>
+                {% for ingredient in apod["recipes"][0]["extendedIngredients"] %}
+                    <li>{{ ingredient["original"] }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Instructions:</h3>
+            <p>{{ apod["recipes"][0]["instructions"] }}</p>
+        {% else %}
+            <p>No Recipe Found</p>
+        {% endif %}
+        <button onclick="getNewRecipe()">Get Another Recipe</button>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
