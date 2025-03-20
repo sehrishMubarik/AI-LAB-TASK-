@@ -9,22 +9,15 @@ APOD_URL = "https://api.spoonacular.com/recipes/random"
 
 @app.route("/", methods=["GET"])
 def index():
-    par = {"apiKey": spoonacular_API}  # Fixed API key parameter
+    par = {"apiKey": spoonacular_API} 
     response = requests.get(APOD_URL, params=par)
     
     print("API Response Status:", response.status_code)
-    print("API Response Content:", response.text)  # Debugging step
+    print("API Response Content:", response.text) 
 
     apod_data = response.json()
     return render_template("index.html", apod=apod_data)
 
-
-# @app.route("/", methods=["GET"])
-# def index():
-#     par = {"api_key" : spoonacular_API}
-#     response = requests.get(APOD_URL, params=par)
-#     apod_data = response.json()
-#     return render_template("index.html", apod = apod_data)
 
 if __name__ == "__main__":
     app.run(debug=False)
